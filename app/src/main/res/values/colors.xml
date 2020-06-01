@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="black">#000000</color>
+    <color name="secondarytext">#B6B6B6</color>
+    <color name="white">#ffffff</color>
+    <color name="green">#689f38</color>
+    <color name="green_light">#c5e1a5</color>
+    <color name="red">#d32f2f</color>
+    <color name="red_light">#ef9a9a</color>
+    <color name="orange">#ff7043</color>
+    <color name="background">#F7F7F7</color>
+    <color name="kapchatcheck">#D3D3D3</color>
+    <color name="light_grey">#424242</color>
+    <color name="navigationunselect">#757575</color>
+    <color name="light_blue">#40c4ff</color>
+    <color name="background_color">#e3e8ee</color>
+
+</resources>
