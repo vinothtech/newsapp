@@ -33,7 +33,6 @@ class AppApiHelper {
             if (::apiHelper.isInitialized && apiHelper != null) {
                 return apiHelper;
             } else {
-
                 val gson = GsonBuilder()
                     .setLenient()
                     .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")

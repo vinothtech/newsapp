@@ -1,8 +1,7 @@
-package com.newsapp.ui
+package com.newsapp.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.newsapp.data.model.Articles
 import com.newsapp.databinding.ItemLayoutBinding

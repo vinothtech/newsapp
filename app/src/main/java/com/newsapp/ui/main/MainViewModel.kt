@@ -1,4 +1,4 @@
-package com.newsapp.ui
+package com.newsapp.ui.main
 
 import android.app.Application
 import androidx.lifecycle.*
@@ -7,9 +7,9 @@ import com.newsapp.data.model.Articles
 import com.newsapp.data.model.Sources
 import com.newsapp.data.model.ResponseParser
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
-import java.lang.Exception
 
 class MainViewModel(context: Application) : AndroidViewModel(context) {
 
@@ -18,11 +18,12 @@ class MainViewModel(context: Application) : AndroidViewModel(context) {
     val apiHelper: AppApiHelper by lazy { AppApiHelper.getAPPAPIInstance() }
     val articleList: ArrayList<Articles> = ArrayList<Articles>();
     val articleListLiveData = MutableLiveData<List<Articles>>()
-
+    val currentPage: MutableLiveData<Int> = MutableLiveData()
+    var compositeDisposable = CompositeDisposable();
 
     fun getSourcesList() {
         isLoading.value = true
-        apiHelper.getSourceList()
+        compositeDisposable.add(apiHelper.getSourceList()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(object : DisposableSingleObserver<ResponseParser>() {
@@ -34,15 +35,23 @@ class MainViewModel(context: Application) : AndroidViewModel(context) {
                 }
 
                 override fun onError(e: Throwable) {
-                    isLoading.value = false
+                    isLoading.value = true
                     e.printStackTrace()
                 }
             })
+        );
     }
 
 
-    fun getArticles(articleId: String) {
-        apiHelper.getArticles(articleId)
+    fun getArticles(sourceId: String) {
+        val articleList = articleListLiveData.value?.filter { it.source.id == sourceId } ?: listOf()
+        if (articleList.isEmpty()) {
+            loadArticles(sourceId)
+        }
+    }
+
+    fun loadArticles(articleId: String) {
+        compositeDisposable.add(apiHelper.getArticles(articleId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(object : DisposableSingleObserver<ResponseParser>() {
@@ -58,7 +67,13 @@ class MainViewModel(context: Application) : AndroidViewModel(context) {
                     e.printStackTrace()
                 }
             })
+        )
 
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.dispose()
     }
 
 }

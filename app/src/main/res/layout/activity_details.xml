@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.DetailsActivity">
+    tools:context=".ui.details.DetailsActivity">
 
     <WebView
         android:id="@+id/webView"
@@ -19,5 +19,39 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/oops_des"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dp"
+        android:paddingTop="10dp"
+        android:visibility="gone"
+        android:paddingRight="30dp"
+        android:paddingBottom="10dp"
+        android:text="Slow or no internet connection. Please check your internet settings."
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/click_to_refresh"
+        android:layout_width="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/oops_des"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        android:background="@color/colorAccent"
+        android:paddingLeft="30dp"
+        android:paddingTop="10dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="10dp"
+        android:text=" Click To Refresh."
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
